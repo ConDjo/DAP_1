@@ -15,4 +15,7 @@ product_list = df["Product Name"].unique()
 total_sales_product = round(df[["Product Name", "Sales"]].groupby("Product Name").agg({"Sales":"sum"}).reset_index().sort_values(by = "Sales", ascending = False), 2)
 
 st.dataframe(formatIndex(total_sales_product.head(10)))
+st.dataframe(total_sales_product.tail(10))
 
+fig = px.bar(total_sales_product, x = "Product Name", y = "Sales")
+st.plotly_chart(fig, use_container_width=True)
